@@ -5,9 +5,9 @@ Welcome to the world of coding
 ## For the impatient
 
 In the project folder
-step 1) npm install
-step 2) npm start
-step 3) http://localhost:3000 
+step 1) npm install <br/>
+step 2) npm start <br/>
+step 3) http://localhost:3000 <br/>
 
 ## Available Scripts
 
