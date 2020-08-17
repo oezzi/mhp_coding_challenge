@@ -24,9 +24,9 @@ if you want to create a production build just run following command and you will
 
 ## TODOs
 - currently no tests written for a production environment where CI an CD is done this would be important
-- indicator for loading ajax request
+- indicator for loading ajax request (DONE)
 - redux
-- back button in house detail view instead of text link
+- back button in house detail view instead of text link (DONE)
 
 
 ## Available Scripts
