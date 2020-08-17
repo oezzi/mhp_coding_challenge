@@ -21,6 +21,14 @@ browser should open automagically http://localhost:3000 <br/>
 if you want to create a production build just run following command and you will find all the packed files in the build folder<br/>
 <pre>npm run build </pre><br/>
 
+As soon as the build folder is ready to be deployed.
+You may serve it with a static server:
+
+<pre>
+npm install -g serve
+serve -s build
+</pre>
+
 
 ## TODOs
 - currently no tests written for a production environment where CI an CD is done this would be important
