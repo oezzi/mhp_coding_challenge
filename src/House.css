@@ -6,6 +6,7 @@
   line-height: 190px;
   margin: 10px;
   width: 250px;
+  cursor: pointer;
 }
 
 .hover_effect:hover {
