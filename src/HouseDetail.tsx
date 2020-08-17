@@ -31,6 +31,7 @@ interface HouseJsonType {
 interface IState {
   data?: HouseJsonType;
   houseId?: number;
+  error: boolean;
 }
 
 class HouseDetail extends React.Component<HouseDetailProps, IState>{
@@ -39,14 +40,18 @@ class HouseDetail extends React.Component<HouseDetailProps, IState>{
 
   constructor(props: HouseDetailProps) {
     super(props);
-    this.state = {};
+    this.state = {error: false};
   }
 
   fetchContent() {
     axios.get("https://anapioficeandfire.com/api/houses/" + this.props.match.params.houseId)
       .then(res => {
-        this.setState({ data: res.data, houseId: parseInt(this.props.match.params.houseId as string) });
+        this.setState({ data: res.data, houseId: parseInt(this.props.match.params.houseId as string), error: false });
       })
+      .catch(error => {
+        console.log("fetched the error")
+        this.setState({error: true});
+    })
 
   }
 
@@ -92,6 +97,11 @@ class HouseDetail extends React.Component<HouseDetailProps, IState>{
 
 
   render() {
+    if (this.state.error) {
+      return (
+        <Card>SOMETHING BAD HAPPENED PLEASE TRY AGAIN</Card>
+      )
+    }
     let data = this.state.data;
     if (!data) {
       return (
@@ -104,6 +114,7 @@ class HouseDetail extends React.Component<HouseDetailProps, IState>{
         </Card>
       )
     }
+
     return (
       <Card
         className={"house_detail centered"}

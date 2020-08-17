@@ -17,11 +17,11 @@ interface IState {
   page: number,
   currentPage: number,
   pageCount: number,
-  loading: boolean
+  loading: boolean,
+  error: boolean
 };
 
 export default class HouseOverview extends React.Component<IProps, IState> {
-
   constructor(props: IProps) {
     super(props)
     this.state = {
@@ -29,7 +29,8 @@ export default class HouseOverview extends React.Component<IProps, IState> {
       page: 1,
       currentPage: 1,
       pageCount: 1,
-      loading: false
+      loading: false,
+      error: false
     }
   }
 
@@ -73,8 +74,12 @@ export default class HouseOverview extends React.Component<IProps, IState> {
 
         this.setState({
           entries: res.data.map((item: entry) => { return { name: item.name, url: item.url.match('\\d+') } }),
-          loading: false
+          loading: false,
+          error: false
         });
+      })
+      .catch(error => {
+        this.setState({error: true})
       })
 
   }
@@ -86,6 +91,9 @@ export default class HouseOverview extends React.Component<IProps, IState> {
 
 
   render() {
+    if (this.state.error) {
+      return (<div>SOMETHING BAD HAPPENED PLEASE TRY AGAIN</div>)
+    }
     if (Boolean(this.state.entries)) {
 
       return (
