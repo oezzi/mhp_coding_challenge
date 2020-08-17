@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import axios from "axios";
-import { Card, Table, TableBody, TableCell, TableRow, Typography, Button } from '@material-ui/core';
+import { Card, Table, TableBody, TableCell, TableRow, Typography, CircularProgress } from '@material-ui/core';
 import './HouseDetail.css';
 
 interface HouseDetailProps extends RouteComponentProps<any> {
@@ -51,7 +51,8 @@ class HouseDetail extends React.Component<HouseDetailProps, IState>{
   }
 
   componentDidUpdate() {
-    if (parseInt(this.props.match.params.houseId as string) !== this.state.houseId) {
+    if (parseInt(this.props.match.params.houseId as string) !== this.state.houseId && this.state.data !== undefined) {
+      this.setState({ data: undefined })
       this.fetchContent();
     }
   }
@@ -60,7 +61,8 @@ class HouseDetail extends React.Component<HouseDetailProps, IState>{
     this.fetchContent()
   }
 
-  getRepresentation(data: string | URL | string[] | null[] | null | undefined): any {
+  getRepresentation(data: string | URL | string[] | null[] | null | undefined,
+    index: number): any {
     let dataType: string = typeof data;
     if (data == null) {
       return (<Typography></Typography>);
@@ -70,19 +72,19 @@ class HouseDetail extends React.Component<HouseDetailProps, IState>{
         let matcher = (data as string).match("houses/(\\d+)");
         if (matcher != null) {
           let shortLink = "/houseDetails/" + matcher[1] + "/" + this.props.match.params.backgroundColor
-          return <Link to={shortLink}>House {matcher[1]}</Link>
+          return <Link key={index} to={shortLink}>House {matcher[1]}</Link>
         } else {
-          return (<Typography>{data}</Typography>);
+          return (<Typography key={index}>{data}</Typography>);
         }
 
       } else if ((data as string).startsWith("https://")) {
-        return <div><a target="_blank" rel="noopener noreferrer" href={data as string}>{data}</a></div>;
+        return <div key={index}><a target="_blank" rel="noopener noreferrer" href={data as string}>{data}</a></div>;
       } else {
-        return (<Typography>{data}</Typography>)
+        return (<Typography key={"data_" + index}>{data}</Typography>)
       }
     } else if (dataType === "object") {
       if (Array.isArray(data)) {
-        return ((data as string[]).map((entry) => { return this.getRepresentation(entry) }));
+        return ((data as string[]).map((entry, newIndex) => { return this.getRepresentation(entry, index + (newIndex * 100)) }));
       }
     }
     return <Typography>{data}</Typography>
@@ -92,20 +94,28 @@ class HouseDetail extends React.Component<HouseDetailProps, IState>{
   render() {
     let data = this.state.data;
     if (!data) {
-      return (<div>EMPTY</div>)
+      return (
+        <Card
+          className={"house_detail centered"}
+          style={{ backgroundColor: "#" + this.props.match.params.backgroundColor }}>
+          <div className="centered">
+            <CircularProgress />
+          </div>
+        </Card>
+      )
     }
     return (
       <Card
         className={"house_detail centered"}
         style={{ backgroundColor: "#" + this.props.match.params.backgroundColor }}>
         <div className="centered">
-          <div style={{ textAlign: "left" }}>
-            <Button variant="contained" color="primary" href="/">&lt; Back to Overview</Button>
+          <div className="left">
+            <Link className="link_button" to="/">&lt; Back to Overview</Link>
           </div>
           <Typography variant="h3" className="big_header text_shadow">{data.name}</Typography>
           <Table className="details_table">
             <TableBody>
-              {(Object.keys(data).map((key, index) => (<TableRow hover={true} key={index}><TableCell align="right" size="medium" className="name_cell">{key.toUpperCase()}</TableCell><TableCell align="left" className="content_cell">{this.getRepresentation(data![key as keyof HouseJsonType])}</TableCell></TableRow>)))}
+              {(Object.keys(data).map((key, index) => (<TableRow hover={true} key={"row_" + index}><TableCell key={index + "_1"} align="right" size="medium" className="name_cell">{key.toUpperCase()}</TableCell><TableCell key={index + "_2"} align="left" className="content_cell">{this.getRepresentation(data![key as keyof HouseJsonType], index)}</TableCell></TableRow>)))}
             </TableBody>
           </Table>
         </div>
