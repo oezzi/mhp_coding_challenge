@@ -1,14 +1,13 @@
 Welcome to the world of coding
 
-#MHP Coding Challenge
+# MHP Coding Challenge
 
-##For the impatient
+## For the impatient
 
 In the project folder
 step 1) npm install
 step 2) npm start
 step 3) http://localhost:3000 
-
 
 ## Available Scripts
 
