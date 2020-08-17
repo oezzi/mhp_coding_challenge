@@ -1,0 +1,59 @@
+.houseCard {
+  background-color: gray;
+  display: inline-block;
+  text-align: center;
+  height: 200px;
+  line-height: 190px;
+  margin: 10px;
+  width: 250px;
+}
+
+.hover_effect:hover {
+  transform: scale(1.1);
+  animation-delay: 0ms;
+  animation-name: none;
+}
+
+.click_info {
+  display: none;
+  color: #aaa;
+}
+
+.houseCard:hover .click_info {
+  display: block;
+  margin-top: 20px;
+  bottom: 0px;
+
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate__fadeInUp {
+  animation-name: fadeInUp;
+}
+
+.animate__animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.animate_delay_short {
+  animation-delay: 150ms;
+}
+
+.animate_delay_medium {
+  animation-delay: 250ms;
+}
+
+.animate_delay_long {
+  animation-delay: 350ms;
+}

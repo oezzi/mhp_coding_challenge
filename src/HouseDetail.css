@@ -1,0 +1,31 @@
+.house_detail{
+  width: 80%;
+  padding: 2em;
+}
+
+.name_cell {
+  width: 40%;
+  font-weight: bold!important;
+}
+
+.content_cell{
+  width: 60%;
+}
+
+.details_table{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+.details_table .MuiTableCell-root{
+  border-bottom: none;
+}
+
+a, a:visited {
+  color: inherit;
+  text-decoration: underline;
+  color: white;
+}
