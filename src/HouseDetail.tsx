@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import axios from "axios";
-import { Card, Table, TableBody, TableCell, TableRow, Typography } from '@material-ui/core';
+import { Card, Table, TableBody, TableCell, TableRow, Typography, Button } from '@material-ui/core';
 import './HouseDetail.css';
 
 interface HouseDetailProps extends RouteComponentProps<any> {
@@ -99,7 +99,9 @@ class HouseDetail extends React.Component<HouseDetailProps, IState>{
         className={"house_detail centered"}
         style={{ backgroundColor: "#" + this.props.match.params.backgroundColor }}>
         <div className="centered">
-          <Link to="/">Overview</Link>
+          <div style={{ textAlign: "left" }}>
+            <Button variant="contained" color="primary" href="/">&lt; Back to Overview</Button>
+          </div>
           <Typography variant="h3" className="big_header text_shadow">{data.name}</Typography>
           <Table className="details_table">
             <TableBody>

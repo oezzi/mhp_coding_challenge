@@ -2,12 +2,32 @@ Welcome to the world of coding
 
 # MHP Coding Challenge
 
+React Application with Typescript, Axios for Ajax Requests and Material UI Library. (but not really used Material Design)
+
+Here is the Challenge Description which was given:<br/>
+https://github.com/MHP-A-Porsche-Company/coding-challenges/tree/master/Web
+
+Please have a look at the TODO section
+
 ## For the impatient
 
-In the project folder
-step 1) npm install <br/>
-step 2) npm start <br/>
-step 3) http://localhost:3000 <br/>
+In the project folder <br/>
+Step 1 <pre>npm install</pre> <br/>
+Step 2 <pre>npm start</pre> <br/>
+Step 3 <br/>
+browser should open automagically http://localhost:3000 <br/>
+<br/>
+<br/>
+if you want to create a production build just run following command and you will find all the packed files in the build folder<br/>
+<pre>npm run build </pre><br/>
+
+
+## TODOs
+- currently no tests written for a production environment where CI an CD is done this would be important
+- indicator for loading ajax request
+- redux
+- back button in house detail view instead of text link
+
 
 ## Available Scripts
 
@@ -24,7 +44,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
-
 
 ### `npm run build`
 
